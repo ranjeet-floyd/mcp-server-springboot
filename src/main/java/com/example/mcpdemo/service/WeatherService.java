@@ -2,6 +2,7 @@ package com.example.mcpdemo.service;
 
 import org.slf4j.Logger;
 import org.springframework.ai.tool.annotation.Tool;
+import org.springframework.ai.tool.annotation.ToolParam;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
@@ -39,7 +40,7 @@ public class WeatherService {
     }
 
     @Tool(description = "Get detailed weather forecast for a specific grid location")
-    public String getDetailedForecast(String office, int gridX, int gridY) {
+    public String getDetailedForecast(@ToolParam(description ="Office name" ) String office, int gridX, int gridY) {
         LOGGER.info("Fetching detailed forecast for office: " + office + ", gridX: " + gridX + ", gridY: " + gridY);
         return restClient.get()
                 .uri("/gridpoints/" + office + "/" + gridX + "," + gridY + "/forecast")
